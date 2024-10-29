@@ -1,0 +1,75 @@
+<div id="rb-toggleRootContainer">
+
+  <h3 class="rb-toggleHeader"><a href="#">How do I get a RateBeer.com API Key?</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+      <div class="rb-toggleBlock">
+        Visit RateBeer.com's API page at 
+        <a href="http://www.ratebeer.com/json/ratebeer-api.asp">http://www.ratebeer.com/json/ratebeer-api.asp</a> 
+        and follow the instructions provided.
+      </div>
+   </div>
+   
+  <h3 class="rb-toggleHeader"><a href="#">Can I use the plugin without a RateBeer.com API Key?</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+      <div class="rb-toggleBlock">
+        No. All of the data calls require a RateBeer API key.
+      </div>
+   </div>
+   
+  <h3 class="rb-toggleHeader"><a href="#">My RateBeer.com API Key request is taking too long. Can you help me?</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+      <div class="rb-toggleBlock">
+        No. The plugin author doesn't work for RateBeer.com, so I can't help speed up your RateBeer.com API request. 
+        You can join the RateBeer.com API Google Group to inquire about the status.
+      </div>
+   </div>
+   
+  <h3 class="rb-toggleHeader"><a href="#">Can I hide the RateBeer branding ("Data Source: RateBeer")?</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+      <div class="rb-toggleBlock">
+        No. You cannot hide the RateBeer branding. 
+        You are bound to RateBeer's API terms and conditions. Refer to the API Agreement section titled 'Branding' for clarification.
+      </div>
+   </div>
+   
+  <h3 class="rb-toggleHeader"><a href="#">How do I update incorrect data?</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+      <div class="rb-toggleBlock">
+        If a beer, brewer, or place data (content) is incorrect. Please log into RateBeer.com and submit the data change requests using
+        the RateBeer.com web site.
+      </div>
+   </div>
+    
+  <h3 class="rb-toggleHeader"><a href="#">How does the cache work?</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+      <div class="rb-toggleBlock">
+          Each call to the RateBeer.com API stores the response as a file in the /cache/ folder. Then
+          when another call is made to the same API function using the same parameters, the /cache/ 
+          folder is checked to see if there's an already stored data file created within the specified
+          cache time (default 24 hours). If a file is found (and it was created within the specified
+          cache time), then the file is opened, read, and then displayed to the page. If a file
+          was not found or the created time exceeded the cache time, then a call is made to RateBeer.com's
+          web servers via their API and that response is stored in the /cache/ folder.
+      </div>
+   </div>
+
+  <h3 class="rb-toggleHeader"><a href="#">How do I clear my cache?</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+      <div class="rb-toggleBlock">
+          There is a 'Delete Cache' button on the plugin's settings page.
+      </div>
+   </div>
+          
+  <h3 class="rb-toggleHeader"><a href="#">Why are different fields returned for different tags?</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+      <div class="rb-toggleBlock">
+          The fields returned for each API call might be different. For example, beer style is 
+          not returned on some calls but may be returned on another call. 
+          If you'd like to see more fields added to RateBeer's API calls, then you can 
+          request RateBeer to modify their API to accommodate your request.
+          Please post a note in the support forum, if RateBeer developers add the new field so I 
+          can update the documentation and code.
+      </div>
+   </div>
+            
+</div>

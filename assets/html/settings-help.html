@@ -1,0 +1,1535 @@
+<h2>Beer Ratings Help</h2> 
+
+<p>The plugin returns all of the fields available via the RateBeer.com's API (at the time of plugin release). For questions concerning which fields are available via the API queries, please visit RateBeer.com's API Google Group. If new fields are added to the API response, then I can add those fields to the output.</p>
+
+<p>Click the section headers below to view specific fields available for use in your output formats.</p>
+
+<h4>How to use Output Fields</h4>
+
+<p>Use the output fields as HTML placeholders. For example, if you want to output the name of the beer, then place '#_BEERNAME' in your output format and it will be dynamically replaced with the actual beer name.</p>
+
+<h4>How to use Conditions</h4>
+
+<p>Conditions are logical operations such as 'if' statements. For example, if you want to render a beer's ABV, you can use '#_ALCOHOL'. However, if don't want to render the value if it's null/empty, you can use '{has_abv}ABV: #_ALCOHOL %{/has_abv}'. Using that condition, the ABV will only be rendered if it is not null/empty.</p>
+
+<h4>Notes</h4>
+<ol> 
+  <li> You can download the RateBeer's complete list of beers with beer name, beer ID, and searchable field at <a href="http://www.ratebeer.com/documents/downloads/beers.zip">http://www.ratebeer.com/documents/downloads/beers.zip</a>. This file is automatically recreated every Saturday morning.</li>
+</ol>
+
+<div id="rb-toggleRootContainer">
+  <h2>Beer Information</h2>
+  <h3 class="rb-toggleHeader"><a href="#">Beer Related Placeholders [beerratings-beer]</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+    <div class="rb-toggleBlock"> 
+       <h4>Description</h4>
+       <p>Show all the beers by via Beer ID.</p>
+       <h4>How to find the Beer ID</h4>
+       <ol>
+        <li> Search <a href="http://www.ratebeer.com" target="_blank">RateBeer.com</a></li>
+        <li> Once you've found the beer, the ID is located in the URL. See below: <br/>
+              http://www.ratebeer.com/beer/stone-arrogant-bastard-ale/<b>1315</b>/
+        </li>
+       </ol>
+       <h4>Code Example</h4>
+        <p>Attributes</p>
+       <dl>
+        <dt>id (required)</dt>
+          <dd>The brewer ID(s). If more than one, then use a comma delimitor.</dd>
+       </dl>  
+       <code>[beerratings-beer id='1315']</code>
+       <p>You may also enter multiple beer IDs as shown in the examples below:</p>
+       <code>[beerratings-beer id='1315,32329']</code>
+       <h4>API Test</h4>
+       <p>Use the below URL to test your API key and see the raw JSON data.<br/>
+          http://www.ratebeer.com/json/bff.asp?k=YOUR_API_KEY&b=1315
+       </p>
+       <h4>Conditions</h4>
+       <table class="form-table">
+        <tr>
+          <td><b>{has_abv}</b></td>
+          <td>Only render inner text if {has_abv} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{is_alias}</b></td>
+          <td>Only render inner text if {is_alias} is true.</td>
+        </tr>
+         <tr>
+          <td><b>{is_not_alias}</b></td>
+          <td>Only render inner text if {is_not_alias} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_ibu}</b></td>
+          <td>Only render inner text if {has_ibu} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_overallpctl}</b></td>
+          <td>Only render inner text if {has_overallpctl} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_stylepctl}</b></td>
+          <td>Only render inner text if {has_stylepctl} is true.</td>
+        </tr> 
+        <tr>
+          <td><b>{has_description}</b></td>
+          <td>Only render inner text if {has_description} is true.</td>
+        </tr>
+       </table> 
+       <h4>Output Fields</h4>
+       <table class="form-table">                       
+        <tr>
+          <td><b>#_BEERID</b></td>
+          <td>The unique identifer associated with the beer.</td>
+        </tr>
+        <tr>
+          <td><b>#_BEERNAME</b></td>
+          <td>The beer's name.</td>
+        </tr>
+        <tr>
+          <td><b>#_BREWERID</b></td>
+          <td>The unique identifer associated with the brewery.</td>
+        </tr>
+        <tr>
+          <td><b>#_BREWERNAME</b></td>
+          <td>The brewery's name.</td>
+        </tr>                       
+        <tr>
+          <td><b>#_OVERALLPCTL</b></td>
+          <td>The overall percentage represents a beer’s performance
+           relative to all beers on an adjusted percentile basis. 
+          This value will display full precision of the percentage 
+          (up to 10 places to the right of the decimal).
+          To round the value, use #_OVERALLPCTL0. For 1 or 2 places
+          of precision use #_OVERALLPCTL1 or #_OVERALLPCTL2.
+          </td>
+        </tr>
+        <tr>
+          <td><b>#_STYLEPCTL</b></td>
+          <td>The style percentage represents a beer’s performance relative
+           to its peers in the same beer style category on an 
+           adjusted percentile basis.
+          This value will display full precision of the percentage 
+          (up to 10 places to the right of the decimal).
+          To round the value, use #_STYLEPCTL0. For 1 or 2 places
+          of precision use #_STYLEPCTL1 or #_STYLEPCTL2. 
+          </td>
+        </tr>
+        <tr>
+          <td><b>#_BEERSTYLENAME</b></td>
+          <td>The beer's style name.</td>
+        </tr> 
+        <tr>
+          <td><b>#_ISALIAS</b></td>
+          <td>A boolean indicating whether this is an alias (another name) for a another beer.</td>
+        </tr>
+        <tr>
+          <td><b>#_ALCOHOL</b></td>
+          <td>The beer's alcohol by volume.</td>
+        </tr>
+         <tr>
+          <td><b>#_IBU</b></td>
+          <td>The beer's IBU (International Bitterness Units).</td>
+        </tr>
+        <tr>
+          <td><b>#_DESCRIPTION</b></td>
+          <td>The beer's description.</td>
+        </tr>
+        <tr>
+          <td><b>#_BEERURL</b></td>
+          <td>The URL to the RateBeer.com beer web page.</td>
+        </tr>
+        <tr>
+          <td><b>#_BEERLINK</b></td>
+          <td>A hyperlink to the RateBeer.com beer web page (uses #_BEERURL as href and #_BEERNAME as inner text values).</td>
+        </tr>
+        <tr>
+          <td><b>#_BEERIMAGEURL</b></td>
+          <td>The URL to the RateBeer.com beer image.</td>
+        </tr> 
+        <tr>
+          <td><b>#_BEERIMAGE</b></td>
+          <td>An image HTML tag usingthe RateBeer.com beer image (uses #_BEERIMAGE as src and #_BEERNAME as alt values).</td>
+        </tr>
+         <tr>
+          <td><b>#_BREWERURL</b></td>
+          <td>The URL to the RateBeer.com brewer web page.</td>
+        </tr>
+         <tr>
+          <td><b>#_BREWERLINK</b></td>
+          <td>A hyperlink to the RateBeer.com brewer web page (uses #_BREWERURL as href and #_BREWERNAME as inner text values).</td>
+        </tr>   
+         <tr>
+          <td><b>#_BREWERIMAGEURL</b></td>
+          <td>The URL to the RateBeer.com brewer image.</td>
+        </tr> 
+        <tr>
+          <td><b>#_BREWERIMAGE</b></td>
+          <td>An image HTML tag usingthe RateBeer.com brewer image (uses #_BREWERIMAGE as src and #_BREWERNAME as alt values).</td>
+        </tr>
+      </table>
+    </div>
+  </div> 
+
+  <h3 class="rb-toggleHeader"><a href="#">Beer (By Brewer) Related Placeholders [beerratings-beer-brewer]</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+    <div class="rb-toggleBlock"> 
+       <h4>Description</h4>
+       <p>Show all the beers by a brewer.</p>
+       <h4>How to find the Brewer ID</h4>
+       <ol>
+        <li> Search <a href="http://www.ratebeer.com" target="_blank">RateBeer.com</a></li>
+        <li> Once you've found the brewer, the ID is located in the URL. See below: <br/>
+              http://www.ratebeer.com/brewers/stone-brewing-co/<b>76</b>/
+        </li>
+       </ol>
+       <h4>Code Example</h4>
+        <p>Attributes</p>
+       <dl>
+        <dt>id (required)</dt>
+          <dd>The brewer ID(s). If more than one, then use a comma delimitor.</dd>
+        <dt>userid (optional)</dt>
+          <dd>The userid of the reviewer to select</dd>
+        <dt>show_retired (optional)</dt>
+        <dd>Default value is true. If set to 'false', then retired beers are not shown.</dd>                        
+         <dt>sort (optional)</dt>
+          <dd>The sorting method: 'latest', 'top_raters', 'highest_ratings'</dd>
+       </dl>  
+       <code>[beerratings-beer-brewer id='76']</code>
+       <p>You may also enter multiple brewers IDs as shown in the examples below:</p>
+       <code>[beerratings-beer-brewer id='76,198,11233']</code>
+       <h4>API Test</h4>
+       <p>Use the below URL to test your API key and see the raw JSON data.<br/>
+          http://www.ratebeer.com/json/bw.asp?k=YOUR_API_KEY&b=76
+       </p>
+       <h4>Conditions</h4>
+       <table class="form-table">
+        <tr>
+          <td><b>{has_contractbrewer}</b></td>
+          <td>Only render inner text if {has_contractbrewer} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_brewercity}</b></td>
+          <td>Only render inner text if {has_brewercity} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_abv}</b></td>
+          <td>Only render inner text if {has_abv} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_avg_rating}</b></td>
+          <td>Only render inner text if {has_avg_rating} is true.</td>
+        </tr> 
+         <tr>
+          <td><b>{is_retired}</b></td>
+          <td>Only render inner text if {is_retired} is true.</td>
+        </tr>
+         <tr>
+          <td><b>{is_not_retired}</b></td>
+          <td>Only render inner text if {is_not_retired} is true.</td>
+        </tr>
+         <tr>
+          <td><b>{has_overallpctl}</b></td>
+          <td>Only render inner text if {has_overallpctl} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_stylepctl}</b></td>
+          <td>Only render inner text if {has_stylepctl} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{is_alias}</b></td>
+          <td>Only render inner text if {is_alias} is true.</td>
+        </tr>
+         <tr>
+          <td><b>{is_not_alias}</b></td>
+          <td>Only render inner text if {is_not_alias} is true.</td>
+        </tr>
+       </table> 
+       <h4>Output Fields</h4>
+       <table class="form-table">                       
+        <tr>
+          <td><b>#_BEERID</b></td>
+          <td>The unique identifer associated with the beer.</td>
+        </tr>
+        <tr>
+          <td><b>#_BREWERID</b></td>
+          <td>The unique identifer associated with the brewery.</td>
+        </tr>
+        <tr>
+          <td><b>#_BREWERNAME</b></td>
+          <td>The brewery's name.</td>
+        </tr>
+        <tr>
+          <td><b>#_CONTRACTBREWERID</b></td>
+          <td>The beer's contracted brewery identifier.</td>
+        </tr>
+        <tr>
+          <td><b>#_CONTRACTBREWER</b></td>
+          <td>The beer's contracted brewery name.</td>
+        </tr>
+        <tr>
+          <td><b>#_BEERNAME</b></td>
+          <td>The beer's name.</td>
+        </tr>
+        <tr>
+          <td><b>#_RATECOUNT</b></td>
+          <td>The number (count) of ratings.</td>
+        </tr>
+        <tr>
+          <td><b>#_AVERAGERATING</b></td>
+          <td>The beer's average rating.
+          This value will display full precision of the percentage 
+          (up to 10 places to the right of the decimal).
+          To round the value, use #_AVERAGERATING0. For 1 or 2 places
+          of precision use #_AVERAGERATING1 or #_AVERAGERATING2. 
+          </td>
+        </tr>
+        <tr>
+          <td><b>#_ENTERED</b></td>
+          <td>The date the beer (or brewer?) was added to RateBeer.com.</td>
+        </tr>
+              <tr>
+          <td><b>#_OVERALLPCTL</b></td>
+          <td>The overall percentage represents a beer’s performance
+           relative to all beers on an adjusted percentile basis. 
+          This value will display full precision of the percentage 
+          (up to 10 places to the right of the decimal).
+          To round the value, use #_OVERALLPCTL0. For 1 or 2 places
+          of precision use #_OVERALLPCTL1 or #_OVERALLPCTL2.         
+          </td>
+        </tr>
+        <tr>
+          <td><b>#_STYLEPCTL</b></td>
+          <td>The style percentage represents a beer’s performance relative
+           to its peers in the same beer style category on an 
+           adjusted percentile basis.
+          This value will display full precision of the percentage 
+          (up to 10 places to the right of the decimal).
+          To round the value, use #_STYLEPCTL0. For 1 or 2 places
+          of precision use #_STYLEPCTL1 or #_STYLEPCTL2. 
+          </td>
+        </tr>
+        <tr>
+          <td><b>#_ISALIAS</b></td>
+          <td>A boolean indicating whether this is an alias (another name) for a another beer.</td>
+        </tr>
+        <tr>
+          <td><b>#_ALCOHOL</b></td>
+          <td>The beer's alcohol by volume.</td>
+        </tr>
+        <tr>
+          <td><b>#_RETIRED</b></td>
+          <td>A boolean indicating whether the beer is retired.</td>
+        </tr>
+        <tr>
+          <td><b>#_VERIFIED</b></td>
+          <td>Unknown.</td>
+        </tr>
+        <tr>
+          <td><b>#_USERHADIT</b></td>
+          <td>When using 'userid' attribute, this is a boolean indicating whether the user has had the beer.</td>
+        </tr>
+        <tr>
+          <td><b>#_USERRATING</b></td>
+          <td>When using 'userid' attribute, this the user's beer rating.</td>
+        </tr> 
+        <tr>
+          <td><b>#_BEERURL</b></td>
+          <td>The URL to the RateBeer.com beer web page.</td>
+        </tr>
+        <tr>
+          <td><b>#_BEERLINK</b></td>
+          <td>A hyperlink to the RateBeer.com beer web page (uses #_BEERURL as href and #_BEERNAME as inner text values).</td>
+        </tr>
+        <tr>
+          <td><b>#_BEERIMAGEURL</b></td>
+          <td>The URL to the RateBeer.com beer image.</td>
+        </tr> 
+        <tr>
+          <td><b>#_BEERIMAGE</b></td>
+          <td>An image HTML tag usingthe RateBeer.com beer image (uses #_BEERIMAGE as src and #_BEERNAME as alt values).</td>
+        </tr>
+         <tr>
+          <td><b>#_BREWERURL</b></td>
+          <td>The URL to the RateBeer.com brewer web page.</td>
+        </tr>
+         <tr>
+          <td><b>#_BREWERLINK</b></td>
+          <td>A hyperlink to the RateBeer.com brewer web page (uses #_BREWERURL as href and #_BREWERNAME as inner text values).</td>
+        </tr>   
+         <tr>
+          <td><b>#_BREWERIMAGEURL</b></td>
+          <td>The URL to the RateBeer.com brewer image.</td>
+        </tr> 
+        <tr>
+          <td><b>#_BREWERIMAGE</b></td>
+          <td>An image HTML tag usingthe RateBeer.com brewer image (uses #_BREWERIMAGE as src and #_BREWERNAME as alt values).</td>
+        </tr>
+       </table>
+    </div>
+  </div> 
+  
+  <h3 class="rb-toggleHeader"><a href="#">Beer (By Place) Related Placeholders [beerratings-beer-place]</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+    <div class="rb-toggleBlock">
+       <h4>Description</h4>
+       <p>Show beers available at a place.</p>
+       <h4>How to find the Place ID</h4>
+       <ol>
+        <li> Search <a href="http://www.ratebeer.com" target="_blank">RateBeer.com</a></li>
+        <li> Once you've found the place, the ID is located in the URL. See below: <br/>
+              http://www.ratebeer.com/p/tun-tavern/<b>1105</b>/ 
+        </li>
+       </ol>
+       <h4>Code Example</h4>
+        <p>Attributes</p>
+       <dl>
+        <dt>id (required)</dt>
+          <dd>The place ID(s). If more than one, then use a comma delimitor.</dd>
+           <dt>show_retired (optional)</dt>
+        <dd>Default value is true. If set to 'false', then retired beers are not shown.</dd>
+       </dl>  
+       <code>[beerratings-beer-place id='1105']</code>
+       <p>You may also enter multiple brewers IDs as shown in the examples below:</p>
+       <code>[beerratings-beer-place id='1105,14481']</code>
+       <h4>API Test</h4>
+       <p>Use the below URL to test your API key and see the raw JSON data.<br/>
+          http://www.ratebeer.com/json/beershere.asp?k=YOUR_API_KEY&pid=1105
+       </p>
+       <h4>Conditions</h4>
+       <table class="form-table">        
+        <tr>
+          <td><b>{has_avg_rating}</b></td>
+          <td>Only render inner text if {has_avg_rating} is true.</td>
+        </tr>                       
+       </table> 
+       <h4>Output Fields</h4> 
+       <table class="form-table">         		 
+        <tr>
+          <td><b>#_BEERID</b></td>
+          <td>The unique identifer associated with the beer.</td>
+        </tr>        		
+        <tr>
+          <td><b>#_BEERNAME</b></td>
+          <td>The beer's name.</td>
+        </tr>              
+        <tr>
+          <td><b>#_AVERAGERATING</b></td>
+          <td>The beer's average rating.
+          This value will display full precision of the percentage 
+          (up to 10 places to the right of the decimal).
+          To round the value, use #_AVERAGERATING0. For 1 or 2 places
+          of precision use #_AVERAGERATING1 or #_AVERAGERATING2.
+          </td>
+        </tr>
+        <tr>
+          <td><b>#_TIMEENTERED</b></td>
+          <td>The time the beer was added to RateBeer.com.</td>
+        </tr>
+        <tr>
+          <td><b>#_ISOUT</b></td>
+          <td>A boolean indicating if the beer is available at the place.</td>
+        </tr>
+         <tr>
+          <td><b>#_BEERURL</b></td>
+          <td>The URL to the RateBeer.com beer web page.</td>
+        </tr>
+         <tr>
+          <td><b>#_BEERLINK</b></td>
+          <td>A hyperlink to the RateBeer.com beer web page (uses #_BEERURL as href and #_BEERNAME as inner text values).</td>
+        </tr> 
+        <tr>
+          <td><b>#_BEERIMAGEURL</b></td>
+          <td>The URL to the RateBeer.com beer image.</td>
+        </tr>
+        <tr>
+          <td><b>#_BEERIMAGE</b></td>
+          <td>An image HTML tag usingthe RateBeer.com beer image (uses #_BEERIMAGE as src and #_BEERNAME as alt values).</td>
+        </tr>      
+      </table>
+    </div>
+  </div> 
+
+  <h3 class="rb-toggleHeader"><a href="#">Best Beer (Top 50) Placeholders [beerratings-bestbeer]</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+    <div class="rb-toggleBlock"> 
+       <h4>Description</h4>
+       <p>Get the best beers. Returns the top 50 beers (worldwide).</p>      
+       <h4>Code Example</h4>
+        <p>Attributes</p>
+       <dl> 
+          <dt>limit (optional)</dt>
+          <dd>Default value is 50. Maximum value is 50.</dd>
+          <dt>userid (optional)</dt>
+          <dd>The userid. If provided, the list only shows the best beers the userid has not rated (per country).</dd>          
+          <dt>sort (optional)</dt>
+          <dd>The sorting method: 'rating', 'alpha'</dd>
+       </dl>  
+       <code>[beerratings-bestbeer]</code>  
+       <h4>API Test</h4>
+       <p>Use the below URL to test your API key and see the raw JSON data.<br/>
+          http://www.ratebeer.com/json/tb.asp?k=YOUR_API_KEY&m=top50
+       </p>
+ <h4>Conditions</h4>
+       <table class="form-table">  
+        <tr>
+          <td><b>{has_avg_rating}</b></td>
+          <td>Only render inner text if {has_avg_rating} is true.</td>
+        </tr>          
+       </table>       
+       <h4>Output Fields</h4>
+       <table class="form-table">         				 
+          <tr>
+            <td><b>#_BEERID</b></td>
+            <td>The unique identifer associated with the beer.</td>
+          </tr>
+          <tr>
+            <td><b>#_BEERNAME</b></td>
+            <td>The beer's name.</td>
+          </tr>        			
+          <tr>
+            <td><b>#_BREWERID</b></td>
+            <td>The unique identifer associated with the brewery.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERNAME</b></td>
+            <td>The brewer's name.</td>
+          </tr>
+           <tr>
+            <td><b>#_AVERAGERATING</b></td>
+            <td>The beer's average rating.
+            This value will display full precision of the percentage 
+            (up to 10 places to the right of the decimal).
+            To round the value, use #_AVERAGERATING0. For 1 or 2 places
+            of precision use #_AVERAGERATING1 or #_AVERAGERATING2. 
+            </td>
+          </tr>
+          <tr>
+            <td><b>#_RATECOUNT</b></td>
+            <td>The number (count) of ratings.</td>
+          </tr>   
+          <tr>
+            <td><b>#_BEERURL</b></td>
+            <td>The URL to the RateBeer.com beer web page.</td>
+          </tr>
+          <tr>
+            <td><b>#_BEERLINK</b></td>
+            <td>A hyperlink to the RateBeer.com beer web page (uses #_BEERURL as href and #_BEERNAME as inner text values).</td>
+          </tr>
+          <tr>
+            <td><b>#_BEERIMAGEURL</b></td>
+            <td>The URL to the RateBeer.com beer image.</td>
+          </tr>
+          <tr>
+            <td><b>#_BEERIMAGE</b></td>
+            <td>An image HTML tag usingthe RateBeer.com beer image (uses #_BEERIMAGE as src and #_BEERNAME as alt values).</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERURL</b></td>
+            <td>The URL to the RateBeer.com brewer web page.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERLINK</b></td>
+            <td>A hyperlink to the RateBeer.com brewer web page (uses #_BREWERURL as href and #_BREWERNAME as inner text values).</td>
+          </tr> 
+           <tr>
+          <td><b>#_BREWERIMAGEURL</b></td>
+          <td>The URL to the RateBeer.com brewer image.</td>
+        </tr> 
+        <tr>
+          <td><b>#_BREWERIMAGE</b></td>
+          <td>An image HTML tag usingthe RateBeer.com brewer image (uses #_BREWERIMAGE as src and #_BREWERNAME as alt values).</td>
+        </tr>         
+        </table>
+    </div>
+  </div> 
+   
+  <h3 class="rb-toggleHeader"><a href="#">Best Beer (By Country) Placeholders [beerratings-bestbeer-country]</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+    <div class="rb-toggleBlock">  
+       <h4>Description</h4>
+       <p>Show top 50 beers by country. Optional userid shows you best beers the userid has not had.</p>
+       <h4>How to find the Country ID</h4>
+       <ol>
+        <li> Search <a href="http://www.ratebeer.com" target="_blank">RateBeer.com</a> (Click Beer Ratings, then pick the country in the dropdown on the right side of the page)</li>
+        <li> Once you've found the country, the ID is located in the URL. See below: <br/>
+              http://www.ratebeer.com/beer/country/united-states/<b>213</b>/ 
+        </li>
+       </ol>
+       <h4>Code Example</h4>
+        <p>Attributes</p>
+       <dl>
+        <dt>id (required)</dt>
+          <dd>The country ID(s). If more than one, then use a comma delimitor.</dd>
+          <dt>userid (optional)</dt>
+          <dd>The userid. If provided, the list only shows the best beers the userid has not rated (per country).</dd>
+          <dt>show_retired (optional)</dt>
+          <dd>Default value is true. If set to 'false', then retired beers are not shown.</dd>
+          <dt>sort (optional)</dt>
+          <dd>The sorting method: 'rating', 'alpha'</dd>
+          <dt>limit (optional)</dt>
+          <dd>Default value is 50 (per country ID). Maximum value is 50 (per country ID). If you specify multiple country IDs, then the limit will apply to each individual country. For example, limit='5' with id='213,39' will return 5 beers for id=213 and 5 beers for id=214. The beers sorted by country, so the all beers id=213 will come before beers id=39.</dd>
+       </dl>  
+       <code>[beerratings-bestbeer-country id='213']</code>
+       <p>You may also enter multiple country IDs as shown in the examples below:</p>
+       <code>[beerratings-bestbeer-country id='213,39' show_retired='false' limit='5' sort='rating']</code>
+       <h4>API Test</h4>
+       <p>Use the below URL to test your API key and see the raw JSON data.<br/>
+          http://www.ratebeer.com/json/tb.asp?k=YOUR_API_KEY&m=country&c=213
+       </p>
+       <h4>Conditions</h4>
+       <table class="form-table">  
+        <tr>
+          <td><b>{has_avg_rating}</b></td>
+          <td>Only render inner text if {has_avg_rating} is true.</td>
+        </tr> 
+         <tr>
+          <td><b>{is_retired}</b></td>
+          <td>Only render inner text if {is_retired} is true.</td>
+        </tr>
+         <tr>
+          <td><b>{is_not_retired}</b></td>
+          <td>Only render inner text if {is_not_retired} is true.</td>
+        </tr>
+       </table>
+       <h4>Output Fields</h4>
+       <table class="form-table">         				 
+          <tr>
+            <td><b>#_BEERID</b></td>
+            <td>The unique identifer associated with the beer.</td>
+          </tr>
+          <tr>
+            <td><b>#_BEERNAME</b></td>
+            <td>The beer's name.</td>
+          </tr>    
+         <tr>
+            <td><b>#_AVERAGERATING</b></td>
+            <td>The beer's average rating.
+            This value will display full precision of the percentage 
+            (up to 10 places to the right of the decimal).
+            To round the value, use #_AVERAGERATING0. For 1 or 2 places
+            of precision use #_AVERAGERATING1 or #_AVERAGERATING2. 
+            </td>
+          </tr>
+          <tr>
+            <td><b>#_RATECOUNT</b></td>
+            <td>The number (count) of ratings.</td>
+          </tr>             
+          <tr>
+            <td><b>#_RETIRED</b></td>
+            <td>A boolean indicating whether the beer is retired.</td>
+          </tr>    			         
+          <tr>
+          <td><b>#_BEERSTYLENAME</b></td>
+          <td>The beer's style name.</td>
+          </tr> 
+           <tr>
+            <td><b>#_USERHADIT</b></td>
+            <td>When using 'userid' attribute, this is a boolean indicating whether the user has had the beer.</td>
+          </tr>
+          <tr>
+            <td><b>#_BEERURL</b></td>
+            <td>The URL to the RateBeer.com beer web page.</td>
+          </tr>
+           <tr>
+          <td><b>#_BEERLINK</b></td>
+          <td>A hyperlink to the RateBeer.com beer web page (uses #_BEERURL as href and #_BEERNAME as inner text values).</td>
+          </tr>
+          <tr>
+            <td><b>#_BEERIMAGEURL</b></td>
+            <td>The URL to the RateBeer.com beer image.</td>
+          </tr> 
+          <tr>
+            <td><b>#_BEERIMAGE</b></td>
+            <td>An image HTML tag usingthe RateBeer.com beer image (uses #_BEERIMAGE as src and #_BEERNAME as alt values).</td>
+          </tr>          
+        </table>
+    </div>
+  </div> 
+ 
+  <h3 class="rb-toggleHeader"><a href="#">Best Beer (By Season) Placeholders [beerratings-bestbeer-season]</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+    <div class="rb-toggleBlock">  
+       <h4>Description</h4>
+       <p>Show top 50 beers by season</p>
+       <h4>How to find the Season ID</h4>
+       <ul>
+        <li>1 = Winter</li>
+        <li>2	= Spring</li>
+        <li>3	= Summer</li> 
+        <li>4	= Autumn</li>
+        <li>5	= Special</li>
+        <li>6	= Series</li>  
+       </ul>
+       <h4>Code Example</h4>
+        <p>Attributes</p>
+       <dl>
+        <dt>id (required)</dt>
+          <dd>The season ID(s). If more than one, then use a comma delimitor.</dd>                   
+          <dt>sort (optional)</dt>
+          <dd>The sorting method: 'rating', 'alpha'</dd>
+          <dt>limit (optional)</dt>
+          <dd>Default value is 50 (per season ID). Maximum value is 50 (per season ID). If you specify multiple season IDs, then the limit will apply to each individual season. For example, limit='5' with id='1,2' will return 5 beers for id=1 and 5 beers for id=2. The beers sorted by season, so the all beers id=1 will come before beers id=2.</dd>
+       </dl>  
+       <code>[beerratings-bestbeer-season id='1']</code>
+       <p>You may also enter multiple season IDs as shown in the examples below:</p>
+       <code>[beerratings-bestbeer-season id='1,2' limit='5' sort='rating']</code>
+       <h4>API Test</h4>
+       <p>Use the below URL to test your API key and see the raw JSON data.<br/>
+          http://www.ratebeer.com/json/tb.asp?k=YOUR_API_KEY&m=season&season=1
+       </p>
+       <h4>Conditions</h4>
+       <table class="form-table">  
+        <tr>
+          <td><b>{has_avg_rating}</b></td>
+          <td>Only render inner text if {has_avg_rating} is true.</td>
+        </tr>        
+       </table>
+       <h4>Output Fields</h4>
+       <table class="form-table">         				 
+          <tr>
+            <td><b>#_BEERID</b></td>
+            <td>The unique identifer associated with the beer.</td>
+          </tr>
+          <tr>
+            <td><b>#_BEERNAME</b></td>
+            <td>The beer's name.</td>
+          </tr>    
+          <tr>
+            <td><b>#_BREWERID</b></td>
+            <td>The unique identifer associated with the brewery.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERNAME</b></td>
+            <td>The brewery's name.</td>
+          </tr>              
+          <tr>
+            <td><b>#_RATECOUNT</b></td>
+            <td>The number (count) of ratings.</td>
+          </tr>          
+         <tr>
+            <td><b>#_AVERAGERATING</b></td>
+            <td>The beer's average rating.
+            This value will display full precision of the percentage 
+            (up to 10 places to the right of the decimal).
+            To round the value, use #_AVERAGERATING0. For 1 or 2 places
+            of precision use #_AVERAGERATING1 or #_AVERAGERATING2. 
+            </td>
+          </tr>         
+          <tr>
+            <td><b>#_BEERSTYLENAME</b></td>
+            <td>The beer's style name.</td>
+          </tr>  
+          <tr>
+            <td><b>#_BEERURL</b></td>
+            <td>The URL to the RateBeer.com beer web page.</td>
+          </tr>
+           <tr>
+          <td><b>#_BEERLINK</b></td>
+          <td>A hyperlink to the RateBeer.com beer web page (uses #_BEERURL as href and #_BEERNAME as inner text values).</td>
+          </tr>
+          <tr>
+            <td><b>#_BEERIMAGEURL</b></td>
+            <td>The URL to the RateBeer.com beer image.</td>
+          </tr> 
+          <tr>
+            <td><b>#_BEERIMAGE</b></td>
+            <td>An image HTML tag usingthe RateBeer.com beer image (uses #_BEERIMAGE as src and #_BEERNAME as alt values).</td>
+          </tr>          
+ <tr>
+          <td><b>#_BREWERURL</b></td>
+          <td>The URL to the RateBeer.com brewer web page.</td>
+        </tr>
+         <tr>
+          <td><b>#_BREWERLINK</b></td>
+          <td>A hyperlink to the RateBeer.com brewer web page (uses #_BREWERURL as href and #_BREWERNAME as inner text values).</td>
+        </tr>   
+         <tr>
+          <td><b>#_BREWERIMAGEURL</b></td>
+          <td>The URL to the RateBeer.com brewer image.</td>
+        </tr> 
+        <tr>
+          <td><b>#_BREWERIMAGE</b></td>
+          <td>An image HTML tag usingthe RateBeer.com brewer image (uses #_BREWERIMAGE as src and #_BREWERNAME as alt values).</td>
+        </tr>          
+        </table>
+    </div>
+  </div> 
+  
+   <h3 class="rb-toggleHeader"><a href="#">Best Beer (By Style) Placeholders [beerratings-bestbeer-style]</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+    <div class="rb-toggleBlock"> 
+       <h4>Description</h4>
+       <p>Get the best beers by style. Returns the top 25 beers by beer style.</p>
+       <h4>How to find the Style ID</h4>
+       <ol>
+        <li> Search <a href="http://www.ratebeer.com" target="_blank">RateBeer.com</a> (Click Beer Ratings, then pick the style in the dropdown on the right side of the page)</li>
+        <li> Once you've found the style, the ID is located in the URL. See below: <br/>
+              http://www.ratebeer.com/beerstyles/india-pale-ale-ipa/<b>17</b>/ 
+        </li>
+       </ol>
+       <h4>Code Example</h4>
+        <p>Attributes</p>
+       <dl>
+        <dt>id (required)</dt>
+          <dd>The style ID(s). If more than one, then use a comma delimitor.</dd>
+        <dt>show_retired (optional)</dt>
+        <dd>Default value is true. If set to 'false', then retired beers are not shown.</dd>
+          <dt>limit (optional)</dt>
+        <dd>Default value is 25 (per style ID). Maximum value is 25 (per style ID). If you specify multiple style IDs, then the limit will apply to each individual style. For example, limit='5' with id='17,'18' will return 5 beers for id=17 and 5 beers for id=18. The beers sorted by style, so the all beers id=17 will come before beers id=18.</dd>
+       </dl>  
+       <code>[beerratings-bestbeer-style id='17']</code>
+       <p>You may also enter multiple style IDs as shown in the examples below:</p>
+       <code>[beerratings-bestbeer-style id='17,81' show_retired='false' limit='5']</code>
+       <h4>API Test</h4>
+       <p>Use the below URL to test your API key and see the raw JSON data.<br/>
+          http://www.ratebeer.com/json/style.asp?k=YOUR_API_KEY&s=17
+       </p>
+       <h4>Output Fields</h4>
+       <table class="form-table">         				 
+          <tr>
+            <td><b>#_BEERID</b></td>
+            <td>The unique identifer associated with the beer.</td>
+          </tr>
+          <tr>
+            <td><b>#_BEERNAME</b></td>
+            <td>The beer's name.</td>
+          </tr>        			
+          <tr>
+            <td><b>#_BREWERID</b></td>
+            <td>The unique identifer associated with the brewery.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERNAME</b></td>
+            <td>The brewer's name.</td>
+          </tr>
+          <tr>
+            <td><b>#_BEERURL</b></td>
+            <td>The URL to the RateBeer.com beer web page.</td>
+          </tr>
+          <tr>
+            <td><b>#_BEERLINK</b></td>
+            <td>A hyperlink to the RateBeer.com beer web page (uses #_BEERURL as href and #_BEERNAME as inner text values).</td>
+          </tr>
+          <tr>
+            <td><b>#_BEERIMAGEURL</b></td>
+            <td>The URL to the RateBeer.com beer image.</td>
+          </tr>
+          <tr>
+            <td><b>#_BEERIMAGE</b></td>
+            <td>An image HTML tag usingthe RateBeer.com beer image (uses #_BEERIMAGE as src and #_BEERNAME as alt values).</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERURL</b></td>
+            <td>The URL to the RateBeer.com brewer web page.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERLINK</b></td>
+            <td>A hyperlink to the RateBeer.com brewer web page (uses #_BREWERURL as href and #_BREWERNAME as inner text values).</td>
+          </tr> 
+           <tr>
+          <td><b>#_BREWERIMAGEURL</b></td>
+          <td>The URL to the RateBeer.com brewer image.</td>
+        </tr> 
+        <tr>
+          <td><b>#_BREWERIMAGE</b></td>
+          <td>An image HTML tag usingthe RateBeer.com brewer image (uses #_BREWERIMAGE as src and #_BREWERNAME as alt values).</td>
+        </tr>         
+        </table>
+    </div>
+  </div> 
+  
+  <h3 class="rb-toggleHeader"><a href="#">Beer Review Placeholders [beerratings-beer-review]</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+    <div class="rb-toggleBlock">
+    <h4>Description</h4>
+    <p>Get ratings (reviews) for a beer.</p> 
+    <h4>How to find the Beer ID</h4>
+       <ol>
+        <li> Search <a href="http://www.ratebeer.com" target="_blank">RateBeer.com</a></li>
+        <li> Once you've found the beer, the ID is located in the URL. See below: <br/>
+              http://www.ratebeer.com/beer/alchemist-heady-topper/<b>32329</b>/ 
+        </li>
+       </ol>
+       <h4>Code Example</h4>
+        <p>Attributes</p>
+       <dl>
+        <dt>id (required)</dt>
+          <dd>The beer ID</dd>
+         <dt>userid (optional)</dt>
+          <dd>The userid of the reviewer to select</dd>
+         <dt>sort (optional)</dt>
+          <dd>The sorting method: 'latest', 'top_raters', 'highest_ratings'</dd>
+         <dt>page (optional, default=1)</dt>
+            <dd>For multiple pages of reviews, use this attribute as the page index. Paging starts at page '1'. Each page contains 10 beer reviews. Each beer review has a 'ResultNum' value that corresponds to the result numering sequence, so the 1st result of page 2 will be ResultNum=11.
+       </dl>  
+       <code>[beerratings-beer-review id='32329']<br/>
+       [beerratings-beer-review id='32329' userid='71795']<br/>
+       [beerratings-beer-review id='32329' sort='highest_ratings' page='2']</code>
+       <h4>API Test</h4>
+       <p>Use the below URL(s) to test your API key and see the raw JSON data.<br/>
+          http://www.ratebeer.com/json/gr.asp?k=YOUR_API_KEY&bid=32329<br/>
+           http://www.ratebeer.com/json/gr.asp?k=YOUR_API_KEY&pid=32329&uid=71795<br/>
+           http://www.ratebeer.com/json/gr.asp?k=YOUR_API_KEY&pid=32329&s=3&p=2
+       </p>
+       <h4>Output Fields</h4>  
+       <table class="form-table">
+          <tr>
+            <td><b>#_RESULTNUM</b></td>
+            <td>The result number starting at 1.</td>
+          </tr>
+          <tr>
+            <td><b>#_RATINGID</b></td>
+            <td>The unique identifer associated with the review.</td>
+          </tr>
+          <tr>
+            <td><b>#_APPEARANCE</b></td>
+            <td>The beer's appearance score.</td>
+          </tr>
+          <tr>
+            <td><b>#_AROMA</b></td>
+            <td>The beer's aroma score.</td>
+          </tr>
+          <tr>
+            <td><b>#_FLAVOR</b></td>
+            <td>The beer's flavor score.</td>
+          </tr>
+          <tr>
+            <td><b>#_MOUTHFEEL</b></td>
+            <td>The beer's mouth feel score.</td>
+          </tr>
+          <tr>
+            <td><b>#_OVERALL</b></td>
+            <td>The beer's overall score.</td>
+          </tr>
+          <tr>
+            <td><b>#_TOTALSCORE</b></td>
+            <td>The beer's total score.</td>
+          </tr>
+          <tr>
+            <td><b>#_COMMENTS</b></td>
+            <td>The beer review's comments.</td>
+          </tr>
+          <tr>
+            <td><b>#_TIMEENTERED</b></td>
+            <td>The time the review was added to RateBeer.com.</td>
+          </tr>
+          <tr>
+            <td><b>#_TIMEUPDATED</b></td>
+            <td>The time the review was last updated.</td>
+          </tr>
+          <tr>
+            <td><b>#_USERID</b></td>
+            <td>The unique user identifier.</td>
+          </tr>
+          <tr>
+            <td><b>#_USERNAME</b></td>
+            <td>The reviewer's username.</td>
+          </tr>
+          <tr>
+            <td><b>#_CITY</b></td>
+            <td>The reviewer's city.</td>
+          </tr>
+          <tr>
+            <td><b>#_STATEID</b></td>
+            <td>The unique state/subregion identifier associated with the reviewer.</td>
+          </tr>
+          <tr>
+            <td><b>#_STATE</b></td>
+            <td>The reviewer's state/subregion.</td>
+          </tr>
+          <tr>
+            <td><b>#_COUNTRYID</b></td>
+            <td>The unique country identifier associated with the reviewer.</td>
+          </tr>    
+          <tr>
+            <td><b>#_COUNTRY</b></td>
+            <td>The reviewer's country.</td>
+          </tr>
+          <tr>
+            <td><b>#_RATECOUNT</b></td>
+            <td>The count of reviews given by the reviewer.</td>
+          </tr> 
+           <tr>
+            <td><b>#_USERURL</b></td>
+            <td>The URL to the RateBeer.com user web page.</td>
+          </tr>
+           <tr>
+            <td><b>#_USERLINK</b></td>
+            <td>A hyperlink to the RateBeer.com user web page (uses #_USERURL as href and #_USERNAME as inner text values).</td>
+          </tr>   
+      </table>
+    </div>
+  </div> 
+
+  <h2>Brewer Information</h2>
+  <h3 class="rb-toggleHeader"><a href="#">Brewer Related Placeholders [beerratings-brewer]</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+    <div class="rb-toggleBlock">
+       <h4>Description</h4>
+       <p>Show brewer information by brewer ID.</p>
+       <h4>How to find the Brewer ID</h4>
+       <ol>
+        <li> Search <a href="http://www.ratebeer.com" target="_blank">RateBeer.com</a></li>
+        <li> Once you've found the brewer, the ID is located in the URL. See below: <br/>
+              http://www.ratebeer.com/brewers/stone-brewing-co/<b>76</b>/
+        </li>
+       </ol>
+       <h4>Code Example</h4> 
+       <p>Attributes</p>
+       <dl>
+        <dt>id (required)</dt>
+          <dd>The brewer ID(s). If more than one, then use a comma delimitor.</dd>
+       </dl>
+       <code>[beerratings-brewer id='76']</code>
+       <p>You may also enter multiple brewers IDs as shown in the examples below:</p> 
+       <code>[beerratings-brewer id='76,198,11233']</code>
+       <h4>API Test</h4>
+       <p>Use the below URL to test your API key and see the raw JSON data.<br/>
+          http://www.ratebeer.com/json/bi.asp?k=YOUR_API_KEY&b=76
+       </p>
+       <h4>Conditions</h4>
+       <table class="form-table">
+        <tr>
+          <td><b>{has_brewerdescription}</b></td>
+          <td>Only render inner text if {has_brewerdescription} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_breweraddress}</b></td>
+          <td>Only render inner text if {has_breweraddress} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_brewerwebsite}</b></td>
+          <td>Only render inner text if {has_brewerwebsite} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_facebook}</b></td>
+          <td>Only render inner text if {has_facebook} is true.</td>
+        </tr> 
+        <tr>
+          <td><b>{has_twitter}</b></td>
+          <td>Only render inner text if {has_twitter} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_breweremail}</b></td>
+          <td>Only render inner text if {has_breweremail} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_brewerphone}</b></td>
+          <td>Only render inner text if {has_brewerphone} is true.</td>
+        </tr>
+       </table> 
+       <h4>Output Fields</h4>
+       <table class="form-table">                                 
+          <tr>
+            <td><b>#_BREWERID</b></td>
+            <td>The unique identifer associated with the brewery.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERNAME</b></td>
+            <td>The brewery's name.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERDESCRIPTION</b></td>
+            <td>The brewery's description.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERADDRESS</b></td>
+            <td>The brewery's street address.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERCITY</b></td>
+            <td>The brewery's city.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERSTATEID</b></td>
+            <td>The unique state/subregion identifier associated with the brewery.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERSTATE</b></td>
+            <td>The brewery's state.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERCOUNTRYID</b></td>
+            <td>The unique country identifier associated with the brewery.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERCOUNTRY</b></td>
+            <td>The brewery's country.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERZIPCODE</b></td>
+            <td>The brewery's postal/zip code.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERTYPEID</b></td>
+            <td>The unique type identifer associated with the brewery. </td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERTYPE</b></td>
+            <td>The type of brewer. Types include 'Commercial Brewery', 'Microbrewery', 'Brew Pub', 'Brew Pub/Brewery', 'Contract Brewer', 'Meadery', 'Sake Producer', 'Cidery', 'Client Brewer'.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERWEBSITE</b></td>
+            <td>The brewery's web site URL.</td>
+          </tr>
+          <tr>
+            <td><b>#_FACEBOOK</b></td>
+            <td>The brewery's facebook page/site.</td>
+          </tr>
+          <tr>
+            <td><b>#_TWITTER</b></td>
+            <td>The brewery's twitter account.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWEREMAIL</b></td>
+            <td>The brewery's email address.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERPHONE</b></td>
+            <td>The brewery's phone number.</td>
+          </tr>
+          <tr>
+            <td><b>#_BARRELS</b></td>
+            <td>The number of barrels used by the brewery.</td>
+          </tr>
+          <tr>
+            <td><b>#_OPENED</b></td>
+            <td>The date the brewery opened.</td>
+          </tr>
+          <tr>
+            <td><b>#_ENTEREDON</b></td>
+            <td>The date the brewery was added to RateBeer.com.</td>
+          </tr>
+          <tr>
+            <td><b>#_ENTEREDBY</b></td>
+            <td>The user id of the person who added the brewery to RateBeer.com.</td>
+          </tr>
+          <tr>
+            <td><b>#_LOGOIMAGE</b></td>
+            <td>The brewery's logo image.</td>
+          </tr>
+          <tr>
+            <td><b>#_VIEWCOUNT</b></td>
+            <td>Unknown.</td>
+          </tr>
+          <tr>
+            <td><b>#_SCORE</b></td>
+            <td>Unknown.</td>
+          </tr>
+          <tr>
+            <td><b>#_OOB</b></td>
+            <td>A boolean indicating whether the brewery is out of business.</td>
+          </tr>
+          <tr>
+            <td><b>#_RETIRED</b></td>
+            <td>A boolean indicating whether the brewery is retired/closed.</td>
+          </tr>
+          <tr>
+            <td><b>#_AREACODE</b></td>
+            <td>The brewery's area code.</td>
+          </tr>
+          <tr>
+            <td><b>#_HOURS</b></td>
+            <td>The brewery's hours of operation.</td>
+          </tr>
+          <tr>
+            <td><b>#_HEADBREWER</b></td>
+            <td>The name of the head brewer.</td>
+          </tr>
+          <tr>
+            <td><b>#_METROID</b></td>
+            <td>The unique metro identifier associated with the brewery.</td>
+          </tr>
+          <tr>
+            <td><b>#_MSA</b></td>
+            <td>Unknown.</td>
+          </tr>
+          <tr>
+            <td><b>#_REGIONID</b></td>
+            <td>The unique region identifier associated with the brewery.</td>
+          </tr>
+          <tr>
+            <td><b>#_BREWERURL</b></td>
+            <td>The URL to the RateBeer.com brewer web page.</td>
+          </tr>
+           <tr>
+            <td><b>#_BREWERLINK</b></td>
+            <td>A hyperlink to the RateBeer.com brewer web page (uses #_BREWERURL as href and #_BREWERNAME as inner text values).</td>
+          </tr>   
+           <tr>
+            <td><b>#_BREWERIMAGEURL</b></td>
+            <td>The URL to the RateBeer.com brewer image.</td>
+          </tr> 
+          <tr>
+            <td><b>#_BREWERIMAGE</b></td>
+            <td>An image HTML tag usingthe RateBeer.com brewer image (uses #_BREWERIMAGE as src and #_BREWERNAME as alt values).</td>
+          </tr>
+        </table>
+    </div>
+  </div> 
+              
+  <h2>Place Information</h2>
+  <h3 class="rb-toggleHeader"><a href="#">Place Related Placeholders [beerratings-place]</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+    <div class="rb-toggleBlock">
+       <h4>Description</h4>
+       <p>Place information by place id.</p>
+       <h4>How to find the Place ID</h4>
+       <ol>
+        <li> Search <a href="http://www.ratebeer.com" target="_blank">RateBeer.com</a></li>
+        <li> Once you've found the place, the ID is located in the URL. See below: <br/>
+              http://www.ratebeer.com/p/stone-brewing-world-bistro-and-gardens/<b>7319</b>/ 
+        </li>
+       </ol>
+       <h4>Code Example</h4>
+        <p>Attributes</p>
+       <dl>
+        <dt>id (required)</dt>
+          <dd>The place ID(s). If more than one, then use a comma delimitor.</dd>
+       </dl>  
+       <code>[beerratings-place id='7319']</code>
+       <p>You may also enter multiple place IDs as shown in the examples below:</p>
+       <code>[beerratings-place id='7319,14481']</code>
+       <h4>API Test</h4>
+       <p>Use the below URL to test your API key and see the raw JSON data.<br/>
+          http://www.ratebeer.com/json/pss.asp?k=YOUR_API_KEY&pid=1105
+       </p>
+
+        <h4>Conditions</h4>
+       <table class="form-table">
+        <tr>
+          <td><b>{has_address}</b></td>
+          <td>Only render inner text if {has_address} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_description}</b></td>
+          <td>Only render inner text if {has_description} is true.</td>
+        </tr>
+         <tr>
+          <td><b>{is_retired}</b></td>
+          <td>Only render inner text if {is_retired} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{is_not_retired}</b></td>
+          <td>Only render inner text if {is_not_retired} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_avg_rating}</b></td>
+          <td>Only render inner text if {has_avg_rating} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_bay_mean}</b></td>
+          <td>Only render inner text if {has_bay_mean} is true.</td>
+        </tr> 
+        <tr>
+          <td><b>{has_percentile}</b></td>
+          <td>Only render inner text if {has_percentile} is true.</td>
+        </tr>
+        <tr>
+          <td><b>{has_rate_count}</b></td>
+          <td>Only render inner text if {has_rate_count} is true.</td>
+        </tr>
+       </table>        
+       <h4>Output Fields</h4>  
+        <table class="form-table">         			        			 
+          <tr>
+            <td><b>#_PLACEID</b></td>
+            <td>The unique identifier associated with the place.</td>
+          </tr>
+          <tr>
+            <td><b>#_MAPID</b></td>
+            <td>Unknown.</td>
+          </tr>
+          <tr>
+            <td><b>#_TOURID</b></td>
+            <td>Unknown.</td>
+          </tr>
+          <tr>
+            <td><b>#_PLACENAME</b></td>
+            <td>The place's name.</td>
+          </tr>
+          <tr>
+            <td><b>#_PLAINPLACENAME</b></td>
+            <td>The place's plain name.</td>
+          </tr> 
+          <tr>
+            <td><b>#_MSA</b></td>
+            <td>Unknown.</td>
+          </tr>
+          <tr>
+            <td><b>#_REGIONID</b></td>
+            <td>The unique identifier associated with the place's region.</td>
+          </tr>
+          <tr>
+            <td><b>#_LATITUDE</b></td>
+            <td>The place's latitude.</td>
+          </tr>
+          <tr>
+            <td><b>#_LONGITUDE</b></td>
+            <td>The place's longitude.</td>
+          </tr>
+          <tr>
+            <td><b>#_DESCRIPTION</b></td>
+            <td>The place's description.</td>
+          </tr>
+          <tr>
+            <td><b>#_PLACETYPE</b></td>
+            <td>The type of place.</td>
+          </tr>
+          <tr>
+            <td><b>#_ADDRESS</b></td>
+            <td>The place's street address.</td>
+          </tr>
+          <tr>
+            <td><b>#_CITY</b></td>
+            <td>The place's city.</td>
+          </tr>
+          <tr>
+            <td><b>#_STATEID</b></td>
+            <td>The unique state/subregion identifier associated with the place.</td>
+          </tr>
+          <tr>
+            <td><b>#_STATE</b></td>
+            <td>The place's state/subregion.</td>
+          </tr>
+          <tr>
+            <td><b>#_COUNTRYID</b></td>
+            <td>The unique country identifier associated with the place.</td>
+          </tr>    
+          <tr>
+            <td><b>#_COUNTRY</b></td>
+            <td>The place's country.</td>
+          </tr>
+          <tr>
+            <td><b>#_POSTALCODE</b></td>
+            <td>The place's postal/ZIP code.</td>
+          </tr>       
+          <tr>
+            <td><b>#_PHONENUMBER</b></td>
+            <td>The place's phone number.</td>
+          </tr>
+          <tr>
+            <td><b>#_WEBSITEURL</b></td>
+            <td>The place's web site URL.</td>
+          </tr>
+          <tr>
+            <td><b>#_FACEBOOK</b></td>
+            <td>The place's Facebook page.</td>
+          </tr>
+          <tr>
+            <td><b>#_TWITTER</b></td>
+            <td>The place's Twitter account.</td>
+          </tr>
+          <tr>
+            <td><b>#_RATING</b></td>
+            <td>The place's overall rating.</td>
+          </tr>
+          <tr>
+            <td><b>#_TAPS</b></td>
+            <td>The number of taps at the place.</td>
+          </tr>                        
+          <tr>
+            <td><b>#_BOTTLES</b></td>
+            <td>A boolean indicating whether the place serves bottles.</td>
+          </tr>
+          <tr>
+            <td><b>#_WIFI</b></td>
+            <td>A boolean indicating whether the place has Wi-Fi.</td>
+          </tr>
+          <tr>
+            <td><b>#_TOGO</b></td>
+            <td>A boolean indicating whether the place has to go.</td>
+          </tr>
+          <tr>
+            <td><b>#_SINGLES</b></td>
+            <td>A boolean indicating whether the place has singles.</td>
+          </tr>
+          <tr>
+            <td><b>#_REALALES</b></td>
+            <td>A boolean indicating whether the place has real ales.</td>
+          </tr>
+          <tr>
+            <td><b>#_RAREBEERS</b></td>
+            <td>A boolean indicating whether the place has rare beers.</td>
+          </tr>
+          <tr>
+            <td><b>#_MACROS</b></td>
+            <td>A boolean indicating whether the place has macro beers.</td>
+          </tr>
+          <tr>
+            <td><b>#_GLASSWARE</b></td>
+            <td>A boolean indicating whether the place uses proper glassware.</td>
+          </tr>
+          <tr>
+            <td><b>#_SMOKING</b></td>
+            <td>A boolean indicating whether the place allows smoking.</td>
+          </tr>
+          <tr>
+            <td><b>#_CIGARS</b></td>
+            <td>A boolean indicating whether the place allows cigars.</td>
+          </tr>
+          <tr>
+            <td><b>#_CHILDREN</b></td>
+            <td>A boolean indicating whether the place allows children.</td>
+          </tr>
+          <tr>
+            <td><b>#_RESERVATIONS</b></td>
+            <td>A boolean indicating whether the place requires reservations.</td>
+          </tr>
+          <tr>
+            <td><b>#_PATIO</b></td>
+            <td>A boolean indicating whether the place has patio seating.</td>
+          </tr>
+          <tr>
+            <td><b>#_TV</b></td>
+            <td>A boolean indicating whether the place has a television.</td>
+          </tr>
+          <tr>
+            <td><b>#_GAMES</b></td>
+            <td>A boolean indicating whether the place has games.</td>
+          </tr>
+          <tr>
+            <td><b>#_SCENE</b></td>
+            <td>The place's scene description.</td>
+          </tr>
+          <tr>
+            <td><b>#_STAFF</b></td>
+            <td>The place's staff description.</td>
+          </tr>
+          <tr>
+            <td><b>#_PARKING</b></td>
+            <td>The place's parking description.</td>
+          </tr>
+          <tr>
+            <td><b>#_MUSIC</b></td>
+            <td>The place's music description.</td>
+          </tr>
+          <tr>
+            <td><b>#_EVENTS</b></td>
+            <td>The place's events description.</td>
+          </tr>
+          <tr>
+            <td><b>#_NOISE</b></td>
+            <td>The place's noise description.</td>
+          </tr>
+          <tr>
+            <td><b>#_SEATING</b></td>
+            <td>The place's seating description.</td>
+          </tr>
+          <tr>
+            <td><b>#_FOOD</b></td>
+            <td>The place's food description.</td>
+          </tr>
+          <tr>
+            <td><b>#_COMMENTS</b></td>
+            <td>The place's comments.</td>
+          </tr>
+          <tr>
+            <td><b>#_HOURS</b></td>
+            <td>The place's hours of operation.</td>
+          </tr>
+          <tr>
+            <td><b>#_USERID</b></td>
+            <td>The unique user identifier of the person who added the place to RateBeer.com</td>
+          </tr>
+          <tr>
+            <td><b>#_EDITEDBY</b></td>
+            <td>The unique user identifier of the person who last edited the place.</td>
+          </tr>
+          <tr>
+            <td><b>#_TIMEADDED</b></td>
+            <td>The time the place was added to RateBeer.com.</td>
+          </tr>
+          <tr>
+            <td><b>#_PHONECC</b></td>
+            <td>Unknown.</td>
+          </tr>
+          <tr>
+            <td><b>#_PHONEAC</b></td>
+            <td>The area code of the place. .</td>
+          </tr>
+          <tr>
+            <td><b>#_MAILORDER</b></td>
+            <td>A boolean indicating whether the place does mail order.</td>
+          </tr>
+          <tr>
+            <td><b>#_MAILORDERINTL</b></td>
+            <td>A boolean indicating whether the place does mail order for international orders.</td>
+          </tr>
+          <tr>
+            <td><b>#_AVGRATING</b></td>
+            <td>The place's average rating.</td>
+          </tr>
+          <tr>
+            <td><b>#_BAYMEAN</b></td>
+            <td>The place's Bayesian mean (weighted average) rating.</td>
+          </tr>
+          <tr>
+            <td><b>#_PERCENTILE</b></td>
+            <td>The overall percentage rating.</td>
+          </tr>
+          <tr>
+            <td><b>#_RATECOUNT</b></td>
+            <td>The total number of ratings for the place.</td>
+          </tr>
+          <tr>
+            <td><b>#_TIMEEDITED</b></td>
+            <td>The last time the place was edited.</td>
+          </tr>
+          <tr>
+            <td><b>#_CURRENCY</b></td>
+            <td>The currency accepted by the place.</td>
+          </tr>
+          <tr>
+            <td><b>#_RETIRED</b></td>
+            <td>A boolean indicating whether the place is retired.</td>
+          </tr> 
+          <tr>
+            <td><b>#_PLACEURL</b></td>
+            <td>The URL to the RateBeer.com place web page.</td>
+          </tr>
+           <tr>
+          <td><b>#_PLACELINK</b></td>
+          <td>A hyperlink to the RateBeer.com place web page (uses #_PLACEURL as href and #_PLACENAME as inner text values).</td>
+        </tr>
+       </table>
+    </div>
+  </div>    
+              
+<!--
+  <h3 class="rb-toggleHeader"><a href="#">Place Search Related Placeholders [beerratings-place-search]</a></h3>
+  <div style="display: block;" class="rb-toggleContainer">
+    <div class="rb-toggleBlock">
+       <h4>Description</h4>
+       <p>Search for places by a string. You will get the best results using western characters. You can only use exact phrase matching.</p>
+       <h4>Code Example</h4>
+        <p>Attributes</p>
+       <dl>
+        <dt>query (required)</dt>
+          <dd>The search string</dd>
+       </dl>f  
+       <code>[beerratings-place-search query='capital']</code>                    
+       <h4>API Test</h4>
+       <p>Use the below URL to test your API key and see the raw JSON data.<br/>
+          http://www.ratebeer.com/json/psstring.asp?k=YOUR_API_KEY&s=capital
+       </p>
+       <h4>Output Fields</h4> 
+        <table class="form-table">         			        			 
+          <tr>
+            <td><b>#_PLACEID</b></td>
+            <td>The unique identifier associated with the place.</td>
+          </tr>                        
+          <tr>
+            <td><b>#_PLACENAME</b></td>
+            <td>The place's name.</td>
+          </tr>                         
+          <tr>
+            <td><b>#_CITY</b></td>
+            <td>The place's city.</td>
+          </tr>
+      </table>
+    </div>
+  </div>
+-->
+  
+</div>
